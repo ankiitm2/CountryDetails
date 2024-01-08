@@ -11,7 +11,7 @@
     "test.e2e": "cypress run",
     "test.unit": "vitest",
     "lint": "eslint",
-    "predeploy": "ionic serve",
+    "predeploy": "npm run dev",
     "deploy": "gh-pages -d build"
   },
   "dependencies": {
