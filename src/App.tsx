@@ -27,6 +27,7 @@ const App: React.FC = () => {
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
+          <Route exact path="/CountryDetails" render={() => <Home />} />
           <Route exact path="/" render={() => <Home />} />
           <Route exact path="/countries/:cca3" render={() => <CountryDetails />} />
         </IonRouterOutlet>

@@ -3,8 +3,13 @@ import { IonButton, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle } from
 import { useParams } from 'react-router-dom';
 import { getCountryDetails } from '../Services';
 
+interface CountryDetailsProps {
+    // Define the type for the parameters expected from the route
+    cca3?: string;
+}
+
 export default function CountryDetails() {
-    const { cca3 } = useParams();
+    const { cca3 } = useParams<CountryDetailsProps>();
     console.log("cca3:", cca3);
 
     const [details, setDetails] = useState([]);
@@ -24,21 +29,24 @@ export default function CountryDetails() {
 
     useEffect(() => {
         setLoading(true);
-        console.log("cca3 22=== ", cca3);
-        getCountryDetails(cca3)
-            .then(result => {
-                console.log("result", result, result.data[0]);
-                if (result && result.data) {
-                    setDetails(result.data);
-                }
-            })
-            .catch(error => {
-                console.error("Error fetching country details:", error);
-                setError(error);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+        if (cca3) {
+            getCountryDetails(cca3)
+                .then(result => {
+                    console.log("result", result, result.data[0]);
+                    if (result && result.data) {
+                        setDetails(result.data);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching country details:", error);
+                    setError(error);
+                })
+                .finally(() => {
+                    setLoading(false);
+                });
+        } else {
+            setLoading(false);
+        }
     }, [cca3]);
 
     if (loading) {
