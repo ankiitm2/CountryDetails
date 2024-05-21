@@ -2,7 +2,7 @@ import React from "react";
 import { IonApp, IonRouterOutlet } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 import Home from "./Pages/Home";
-import { Route } from "react-router";
+import { Route, Navigate } from "react-router";
 import CountryDetails from "./Pages/CountryDetails";
 import '@ionic/react/css/core.css';
 import { setupIonicReact } from '@ionic/react';
@@ -27,6 +27,7 @@ const App: React.FC = () => {
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
+          <Route path="*" element={<Navigate to="/" replace />} />
           <Route exact path="/CountryDetails" render={() => <Home />} />
           <Route exact path="/" render={() => <Home />} />
           <Route exact path="/countries/:cca3" render={() => <CountryDetails />} />
